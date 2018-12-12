@@ -37,16 +37,22 @@
               <label>按当前自身掉落计算，预计：</label>
               <span id="preview2"></span>
             </div>
+            <div class="cell_bar">
+              <label>矿山剩余储量：</label>
+              <span id="preview3"></span>
+            </div>
           </div>
         </div>
         <div class="desc">made by 昊天斗罗</div>
     </div>
+    <!-- <script src="https://cdn.bootcss.com/echarts/4.2.0-rc.2/echarts-en.common.min.js"></script> -->
     <script>
       (function(){
         var orgVal;
         var input = document.getElementById("fullnow");
         var preview1 = document.getElementById("preview1");
         var preview2 = document.getElementById("preview2");
+        var preview3 = document.getElementById("preview3");
         input.addEventListener("input",change,false)
         function change(e){
           var val = e.target.value;
@@ -56,11 +62,15 @@
           }
           orgVal = val;
           var fullRate = 10.15
-          preview1.innerHTML = calc(val,fullRate)
-          preview2.innerHTML = calc(val)
+          preview1.innerHTML = calc(val,fullRate).fall
+          preview2.innerHTML = calc(val).fall
+          preview3.innerHTML = calc(val,fullRate).leftAll
         }
         function calc(val,fullRate){
-          if(val === "") return "";
+          if(val === "") return {
+            fall:"",
+            leftAll:""
+          };
           var nowDate = new Date();
           var now = nowDate.getTime();
           var day = nowDate.getDay()
@@ -87,9 +97,13 @@
           if(!fullRate){
             fullRate = ((val - welfare * diffDay)/diffHour).toFixed(2)
           }
-          var result = parseInt(val) + Math.round(leftHour * fullRate) + welfare * leftWelfareDay
+          var leftResult = Math.round(leftHour * fullRate) + welfare * leftWelfareDay
+          var result = parseInt(val) + leftResult
           result = result < val?val:result
-          return result;
+          return {
+            fall:result,
+            leftAll:leftResult
+          };
         }
       })();
 
