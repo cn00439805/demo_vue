@@ -54,9 +54,11 @@
         var preview1 = document.getElementById("preview1");
         var preview2 = document.getElementById("preview2");
         var preview3 = document.getElementById("preview3");
-        input.addEventListener("input",change,false)
-        input.setAttribute("disabled",true)
-        preview1.innerHTML=preview2.innerHTML=preview3.innerHTML="活动已结束"
+        input.addEventListener("input",change,false);
+
+        input.setAttribute("disabled",true);
+        preview1.innerHTML=preview2.innerHTML=preview3.innerHTML="活动已结束";
+
         function change(e){
           var val = e.target.value;
           if(val>9999){
