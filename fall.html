@@ -7,6 +7,7 @@
     <style>
       *{margin:0;padding:0;box-sizing:border-box;}
       body,input{color:#666;font-family: -apple-system-font,Helvetica Neue,sans-serif}
+      input{background:none;}
       .head_pic{width:100%;}
       .head_pic img{width:100%;}
       .cell_box{border-top:1px solid #d9d9d9;border-bottom:1px solid #d9d9d9;padding:5px 0 5px 12px;}
@@ -54,6 +55,8 @@
         var preview2 = document.getElementById("preview2");
         var preview3 = document.getElementById("preview3");
         input.addEventListener("input",change,false)
+        input.setAttribute("disabled",true)
+        preview1.innerHTML=preview2.innerHTML=preview3.innerHTML="活动已结束"
         function change(e){
           var val = e.target.value;
           if(val>9999){
