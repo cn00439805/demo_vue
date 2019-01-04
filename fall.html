@@ -64,6 +64,7 @@
             <div class="cell_bar">
               <label>当前掉落</label>
               <button id="record" class="btn btn-sm">记录</button>
+              <button id="allDel" class="btn btn-sm">全部删除</button>
               <input id="fullnow" type="number" placeholder="请输入">
               
             </div>
@@ -92,6 +93,7 @@
         var orgVal;
         var input = document.getElementById("fullnow");
         var record = document.getElementById("record");
+        var allDel = document.getElementById("allDel");
         var preview1 = document.getElementById("preview1");
         var preview2 = document.getElementById("preview2");
         var preview3 = document.getElementById("preview3");
@@ -99,6 +101,7 @@
         var myChart1 = echarts.init(chart1);
         input.addEventListener("input",change,false);
         record.addEventListener("click",recordDown,false);
+        allDel.addEventListener("click",delAll,false);
 
         myChart1.on('click', function (params) {
             // 控制台打印数据的名称
@@ -109,7 +112,6 @@
                 if(records[i].val == theName){
                   records.splice(i,1)
                   localStorage["records"] = JSON.stringify(records)
-                  createTable()
                   updateDraw()
                 }
               }
@@ -147,13 +149,15 @@
               time:new Date().getTime()
             })
             localStorage["records"] = JSON.stringify(records)
-            createTable()
             updateDraw()
           }
         }
 
-        function createTable(){
-
+        function delAll(){
+          localStorage["records"] = null;
+          delete localStorage["records"];
+          updateDraw()
+          chart1.innerHTML = "";
         }
 
         function updateDraw(){
