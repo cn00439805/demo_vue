@@ -63,8 +63,8 @@
           <div class="cell_box">
             <div class="cell_bar">
               <label>当前掉落</label>
+              <button id="allDel" class="btn btn-sm">全删</button>
               <button id="record" class="btn btn-sm">记录</button>
-              <button id="allDel" class="btn btn-sm">全部删除</button>
               <input id="fullnow" type="number" placeholder="请输入">
               
             </div>
@@ -154,10 +154,11 @@
         }
 
         function delAll(){
-          localStorage["records"] = null;
-          delete localStorage["records"];
-          updateDraw()
-          chart1.innerHTML = "";
+          if(window.confirm("是否要删除全部节点数据")){
+            localStorage["records"] = null;
+            delete localStorage["records"];
+            myChart1.clear();
+          }
         }
 
         function updateDraw(){
