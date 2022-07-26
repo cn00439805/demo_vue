@@ -1,18 +1,72 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <link rel="icon" href="./images/favicon.ico">
-  <title>公寓</title>
-  <style>
-    *{padding:0;margin:0;box-sizing:border-box}html,body,#app,img{width:100%}img{height:200px}img.loaded{height:auto}
-  </style>
-</head>
-<body>
-  <div id="app"></div>
-  <script>
-    const _0x5556 = ['img[data-id=\x27', 'lastNumber', 'src', 'map', 'classList', 'app', 'max', 'abs', 'getAttribute', 'top', 'forEach', 'sort']; const _0x31ab = function (_0x555680, _0x31abd5) { _0x555680 = _0x555680 - 0x0; let _0x4c6b3d = _0x5556[_0x555680]; return _0x4c6b3d; }; const sleep = _0x22e174 => new Promise(_0x405779 => { setTimeout(_0x405779, _0x22e174); }); const setLastNumber = async _0x52248c => { _0x52248c = Number(_0x52248c); await sleep(0x1f4); let _0x4aeda6 = [Math['max'](_0x52248c - 0x4, 0x1), Math[_0x31ab('0x6')](_0x52248c - 0x3, 0x1), Math['max'](_0x52248c - 0x2, 0x1), Math[_0x31ab('0x6')](_0x52248c - 0x1, 0x1), Math['max'](_0x52248c, 0x1), Math[_0x31ab('0x6')](_0x52248c + 0x1, 0x1), Math[_0x31ab('0x6')](_0x52248c + 0x2, 0x1), Math[_0x31ab('0x6')](_0x52248c + 0x3, 0x1), Math['max'](_0x52248c + 0x4, 0x1)]; _0x4aeda6 = _0x4aeda6[_0x31ab('0x3')](_0x5610d8 => { return { 'id': _0x5610d8, 'top': Math[_0x31ab('0x7')](document['querySelector'](_0x31ab('0x0') + _0x5610d8 + '\x27]')['getBoundingClientRect']()['top']) }; }); _0x4aeda6[_0x31ab('0xb')]((_0x11d5bb, _0x318e96) => { return _0x11d5bb[_0x31ab('0x9')] - _0x318e96['top']; }); localStorage[_0x31ab('0x1')] = _0x4aeda6[0x0]['id']; }; (async function () { let _0x5f249f = Number(localStorage[_0x31ab('0x1')]) || 0x19; let _0x195e29 = ''; for (let _0x1e5c34 = 0x0, _0x3f72fe = 0x2fb; _0x1e5c34 < _0x3f72fe; _0x1e5c34++) { _0x195e29 += '<img\x20src=\x22data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7\x22data-src=\x22./images/g' + (_0x1e5c34 + 0x1) + '.png\x22data-id=\x22' + (_0x1e5c34 + 0x1) + '\x22>'; } document['getElementById'](_0x31ab('0x5'))['innerHTML'] = _0x195e29; await sleep(0x0); document['documentElement']['scrollTo'](0x0, 0x0); let _0xcd16a3 = document['querySelector']('img[data-id=\x27' + _0x5f249f + '\x27]'); let _0x135d18 = _0xcd16a3['getBoundingClientRect']()['top']; document['documentElement']['scrollTo'](0x0, _0x135d18); let _0x317884; _0x317884 = new IntersectionObserver(_0x1b7d63 => { _0x1b7d63[_0x31ab('0xa')](_0x2430c7 => { if (_0x2430c7['isIntersecting']) { let { target } = _0x2430c7; target[_0x31ab('0x2')] = target[_0x31ab('0x8')]('data-src'); target[_0x31ab('0x4')]['add']('loaded'); let _0x425cf3 = target['getAttribute']('data-id'); setLastNumber(_0x425cf3); } }); });[...document['querySelectorAll']('img')][_0x31ab('0xa')](_0x388cbe => { _0x317884['observe'](_0x388cbe); }); }());
-  </script>
-</body>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="icon" href="/demo_vue/images/favicon.ico">
+    <title>公寓</title>
+    <style>
+        *{padding:0;margin:0;box-sizing: border-box;}
+        html,body,#app,img{width:100%;}
+        img{height:200px;}
+        img.loaded{height:auto;}
+    </style>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script>
+      const sleep = (timeountMS) => new Promise((resolve) => {setTimeout(resolve, timeountMS) });
+
+      const setLastNumber = async (id) => {
+        id = Number(id);
+        await sleep(500)
+        let arr = [Math.max(id-4,1),Math.max(id-3,1),Math.max(id-2,1),Math.max(id-1,1),Math.max(id,1),Math.max(id+1,1),Math.max(id+2,1),Math.max(id+3,1),Math.max(id+4,1)]
+        arr = arr.map(item => {
+          return {
+            id:item,
+            top:Math.abs(document.querySelector(`img[data-id='${item}']`).getBoundingClientRect().top),
+          }
+        })
+        arr.sort((a,b) => {
+          return a.top - b.top
+        })
+        localStorage["lastNumber"] = arr[0].id
+      }
+      (async function(){
+        let lastNumber = Number(localStorage["lastNumber"]) || 25
+
+        let html = ""
+        for(let i = 0,max = 763;i<max;i++){
+            html += `<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" data-src="/demo_vue/images/g${i+1}.png" data-id="${i+1}">`
+        }
+        document.getElementById("app").innerHTML = html
+        await sleep(0)
+        document.documentElement.scrollTo(0, 0)
+        
+        let currImg = document.querySelector(`img[data-id='${lastNumber}']`)
+        let top2 = currImg.getBoundingClientRect().top
+        document.documentElement.scrollTo(0, top2)
+
+        let observer
+        observer = new IntersectionObserver((changes) => {
+          changes.forEach((change) => {
+            if (change.isIntersecting) {
+              let { target } = change;
+              target.src = target.getAttribute("data-src");
+              target.classList.add("loaded")
+              let id = target.getAttribute("data-id")
+              setLastNumber(id)
+            }
+          });
+        });
+
+        [...document.querySelectorAll("img")].forEach(img => {
+          observer.observe(img);
+        })
+      })()
+
+      
+        
+    </script>
+  </body>
 </html>
